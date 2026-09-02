@@ -20,8 +20,8 @@ html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink);
 body { min-height: 100vh; }
 header { background: var(--navy); color: var(--paper); padding: 1rem 1.2rem 1.05rem; }
 .brand { display: flex; align-items: center; }
-.brand img { height: 72px; width: auto; display: block; }
-@media (min-width: 480px) { .brand img { height: 84px; } }
+.brand img { height: 88px; width: auto; display: block; object-fit: contain; }
+@media (min-width: 480px) { .brand img { height: 104px; } }
 header p { margin: .45rem 0 0; font-size: .88rem; opacity: .85; font-family: system-ui, sans-serif; }
 main { max-width: 42rem; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
 .card { background: #fff; border: 1px solid var(--line); padding: 1.15rem 1.1rem 1.25rem; }
@@ -50,7 +50,7 @@ footer { max-width: 42rem; margin: 0 auto; padding: 0 1rem 2rem; font-family: sy
 </head>
 <body>
 <header>
-  <div class="brand"><img src="yb-crest.svg" width="72" height="82" alt="YB"></div>
+  <div class="brand"><img src="yb-crest.svg" width="104" height="104" alt="YB"></div>
   <p>Preceptorship exam. 25 items. Answers after you submit.</p>
 </header>
 <main>
@@ -65,7 +65,6 @@ footer { max-width: 42rem; margin: 0 auto; padding: 0 1rem 2rem; font-family: sy
   </section>
   <section id="quiz" class="card hidden">
     <p class="progress" id="progress"></p>
-    <p class="kicker" id="meta"></p>
     <p class="stem" id="stem"></p>
     <div id="choices"></div>
     <div class="row">
@@ -113,7 +112,6 @@ function writeStore(extra) {
 function renderQuestion() {
   const item = ITEMS[idx];
   $("progress").textContent = "Question " + item.n + " of " + ITEMS.length;
-  $("meta").textContent = "Type " + item.type + " \u00b7 " + item.topic;
   $("stem").textContent = item.stem;
   const box = $("choices");
   box.innerHTML = "";
