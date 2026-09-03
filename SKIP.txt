@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208 201" role="img" aria-label="YB"><image href="yb-crest.png" width="208" height="201" preserveAspectRatio="xMidYMid meet"/></svg>
