@@ -50,7 +50,7 @@ footer { max-width: 42rem; margin: 0 auto; padding: 0 1rem 2rem; font-family: sy
 </head>
 <body>
 <header>
-  <div class="brand"><img src="yb-crest-v2.svg" width="104" height="104" alt="YB"></div>
+  <div class="brand"><img src="yb-crest.svg" width="104" height="104" alt="YB"></div>
   <p>Preceptorship exam. 25 items. Answers after you submit.</p>
 </header>
 <main>
@@ -197,7 +197,7 @@ $("sendBtn").addEventListener("click", async () => {
     const body = new FormData();
     body.append("_subject", "For Elisha to review and discuss with Yuriy");
     body.append("_template", "box"); body.append("_captcha", "false");
-    body.append("_url", "https://www.yuriybortnik.com/bpdquiz");
+    body.append("_url", "https://www.yuriybortnik.com/quiz-bpd");
     body.append("name", name); body.append("score", lastGrade.correct + " / " + ITEMS.length); body.append("message", message);
     const res = await fetch("https://formsubmit.co/ajax/" + EMAIL_HOST, { method: "POST", headers: { Accept: "application/json" }, body });
     const data = await res.json().catch(() => ({}));
