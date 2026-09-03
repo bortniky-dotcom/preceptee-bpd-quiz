@@ -197,7 +197,7 @@ $("sendBtn").addEventListener("click", async () => {
     const body = new FormData();
     body.append("_subject", "For Elisha to review and discuss with Yuriy");
     body.append("_template", "box"); body.append("_captcha", "false");
-    body.append("_url", "https://bpdquiz.yuriybortnik.com");
+    body.append("_url", "https://www.yuriybortnik.com/bpdquiz");
     body.append("name", name); body.append("score", lastGrade.correct + " / " + ITEMS.length); body.append("message", message);
     const res = await fetch("https://formsubmit.co/ajax/" + EMAIL_HOST, { method: "POST", headers: { Accept: "application/json" }, body });
     const data = await res.json().catch(() => ({}));
