@@ -50,7 +50,7 @@ footer { max-width: 42rem; margin: 0 auto; padding: 0 1rem 2rem; font-family: sy
 </head>
 <body>
 <header>
-  <div class="brand"><img src="https://bortniky-dotcom.github.io/scale-phq9-screener/yb-crest.svg" width="104" height="104" alt="YB"></div>
+  <div class="brand"><img src="yb-crest.svg" width="104" height="150" alt="YB"></div>
   <p>Preceptorship exam. 25 items. Answers after you submit.</p>
 </header>
 <main>
@@ -61,7 +61,7 @@ footer { max-width: 42rem; margin: 0 auto; padding: 0 1rem 2rem; font-family: sy
     <p class="note">Work it like clinic. No looking ahead. Close the tab if you need to. This browser will keep your answers so you can continue. After you submit you get a recap of what you missed.</p>
     <label class="note" for="studentName">Your name</label>
     <input id="studentName" type="text" autocomplete="name" placeholder="Name for the review copy">
-    <div class="row"><button id="beginBtn" type="button">Start exam</button></div>
+    <div class="row"><button id="beginBtn" type="button">Start exam</button><button class="ghost" id="resetStartBtn" type="button">Reset exam</button></div>
   </section>
   <section id="quiz" class="card hidden">
     <p class="progress" id="progress"></p>
@@ -70,6 +70,7 @@ footer { max-width: 42rem; margin: 0 auto; padding: 0 1rem 2rem; font-family: sy
     <div class="row">
       <button class="ghost" id="prevBtn" type="button">Back</button>
       <button id="nextBtn" type="button">Next</button>
+      <button class="ghost" id="resetQuizBtn" type="button">Reset exam</button>
     </div>
   </section>
   <section id="results" class="card hidden">
@@ -82,6 +83,7 @@ footer { max-width: 42rem; margin: 0 auto; padding: 0 1rem 2rem; font-family: sy
       <div class="row">
         <button id="sendBtn" type="button">Send results from this page</button>
         <button class="ghost" id="copyBtn" type="button">Copy summary</button>
+        <button class="ghost" id="resetDoneBtn" type="button">Reset exam</button>
       </div>
       <p class="note" id="sendStatus"></p>
       <textarea id="summaryBox" readonly rows="8" style="width:100%;margin-top:.8rem;font-family:system-ui,sans-serif;font-size:.86rem;line-height:1.4;padding:.6rem .65rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);"></textarea>
@@ -145,6 +147,19 @@ function grade() {
   return { correct, missed };
 }
 let lastGrade = null;
+function clearStore() {
+  try { localStorage.removeItem(STORE); } catch (e) {}
+  document.cookie = STORE + "=;max-age=0;path=/;SameSite=Lax";
+}
+function resetExam() {
+  if (!confirm("Erase this attempt and start from question 1?")) return;
+  clearStore();
+  location.reload();
+}
+["resetStartBtn","resetQuizBtn","resetDoneBtn"].forEach((id) => {
+  const el = $(id);
+  if (el) el.addEventListener("click", resetExam);
+});
 $("beginBtn").addEventListener("click", () => {
   $("start").classList.add("hidden"); $("quiz").classList.remove("hidden"); renderQuestion(); writeStore(); window.scrollTo(0, 0);
 });
