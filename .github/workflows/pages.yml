@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Wire official YB crest
+        run: python3 -c "from pathlib import Path; p=Path('index.html'); t=p.read_text(); a='src=\"items.js\"'; b='src=\"items.js\"></script>\\n<script src=\"yb-crest.js\"'; p.write_text(t.replace(a,b,1) if a in t else t)"
       - uses: actions/configure-pages@v5
         with:
           enablement: true
